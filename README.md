@@ -1,2 +1,4 @@
 # Elantra
-This is my first work only in HTML + CSS, following the example of the courses taken
+Here are my first applied studies!
+I am engaged in HTML, CSS and JavaScript (beginning)
+I have great interests in the world of REACT and mobile =D

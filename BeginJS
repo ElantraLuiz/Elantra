@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> First Testing</title>
+</head>
+<body>
+
+    <canvas width="600" height="400"></canvas>
+
+    <script>
+        let screen = document.querySelector("canvas");
+        let pencil = screen.getContext("2d");
+        pencil.fillStyle = 'cyan';
+        pencil.fillRect(0, 0, 600, 400);
+
+
+        let raio = 10;
+        let xAleatorio = alvosSorteados(0);
+        let yAleatorio = alvosSorteados(0);
+
+        function circulos(x, y, raio, cor){ 
+            
+            pencil.fillStyle = cor;
+            pencil.beginPath();
+            pencil.arc(x, y, raio, 0, 2 * Math.PI);
+            pencil.fill();
+        }
+
+        function limparTela(){ 
+            pencil.clearRect(0, 0, 600, 400);       //autodidático 
+        }
+
+        function alvosAleatorios(x1, y1){                        //projeção dos alvos na screen
+
+        circulos(x1, y1, raio+20, "red");
+        circulos(x1, y1, raio+10, "white");
+        circulos(x1, y1, raio, "red");
+        
+        }
+        function alvosSorteados (max){ 
+            return Math.floor(Math.random() * max) //o Math.floor arredonda para baixo
+        }
+
+        function atualizarTela (){ 
+            limparTela();
+            xAleatorio = alvosSorteados(600);
+            yAleatorio = alvosSorteados(400);
+
+        alvosAleatorios(xAleatorio, yAleatorio);
+            
+        }
+
+        setInterval(atualizarTela, 1000)                //tempo de mudança do alvo, mudar os milisegundos para - ou + dificuldade
+
+        function mouseOn (event){ 
+            let x = event.pageX - screen.offsetLeft;
+            let y = event.pageY - screen.offsetTop;
+            
+            
+            //condição do eixo X                             condição do eixo Y 
+            if((x > xAleatorio - raio ) 
+                    && (x < xAleatorio + raio) 
+                    && (y > yAleatorio - raio) 
+                    && (y < yAleatorio + raio ) ) { 
+
+                alert("ACERTOU!!!");
+            }
+        }
+        
+        screen.onclick = mouseOn;
+
+    </script>
+
+</body>
+</html>
